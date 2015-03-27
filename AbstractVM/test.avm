@@ -1,0 +1,16 @@
+; test.avm
+
+
+push int8(67)
+assert int8(67)
+print
+push float(40.20)
+push double(30.10)
+dump
+push int16(20)
+dump
+add
+dump
+div
+dump
+dump

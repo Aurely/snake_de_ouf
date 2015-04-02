@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 17:32:56 2015 Aurélie LAO
-// Last update Thu Apr  2 17:15:19 2015 Aurélie LAO
+// Last update Thu Apr  2 18:11:58 2015 Trotier Marie
 //
 
 #include <cstring>
@@ -23,8 +23,6 @@ int                     my_totoi(char *str)
   int                   i = 0;
 
   stream >> result;
-  if (str[i] == '-')
-    i = i + 1;
   while (str[i] != '\0')
     {
       if (str[i] < '0' || str[i] > '9')

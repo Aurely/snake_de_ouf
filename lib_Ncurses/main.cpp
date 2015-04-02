@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 17:32:56 2015 Aurélie LAO
-// Last update Thu Apr  2 14:46:03 2015 Aurélie LAO
+// Last update Thu Apr  2 17:09:44 2015 Aurélie LAO
 //
 
 #include <cstring>
@@ -14,23 +14,44 @@
 #include <time.h>
 #include "the_snake.hh"
 #include "my_exception.hh"
+#include <sstream>
+
+int                     my_totoi(char *str)
+{
+  std::istringstream    stream((std::string(str)));
+  int                   result;
+  int                   i = 0;
+
+  stream >> result;
+  if (str[i] == '-')
+    i = i + 1;
+  while (str[i] != '\0')
+    {
+      if (str[i] < '0' || str[i] > '9')
+        return (-1);
+      i = i + 1;
+    }
+  return (result);
+}
 
 void		check_status(Snake *s)
 {
   std::cout << "List = ";
-  for (std::list<int>::iterator it = s->table.begin(); it != s->table.end(); it++)
+  for (std::list<int>::iterator it = s->_table.begin(); it != s->_table.end(); it++)
     std::cout << *it << ' ';
   std::cout << std::endl;
-  std::cout << "x max -------- " << s->x_max << std::endl;
-  std::cout << "y max -------- " << s->y_max << std::endl;
-  std::cout << "x eat -------- " << s->x_eat << std::endl;
-  std::cout << "y eat -------- " << s->y_eat << std::endl;
-  std::cout << "alive -------- " << s->is_alive << std::endl;
-  std::cout << "mange ? ------ " << s->have_meal << std::endl;
+  std::cout << "x max -------- " << s->_x_max << std::endl;
+  std::cout << "y max -------- " << s->_y_max << std::endl;
+  std::cout << "x eat -------- " << s->_x_eat << std::endl;
+  std::cout << "y eat -------- " << s->_y_eat << std::endl;
+  std::cout << "alive -------- " << s->_is_alive << std::endl;
+  std::cout << "mange ? ------ " << s->_have_meal << std::endl;
 }
 
 void		go_Ncurses(Snake *s)
 {
+  check_status(s);
+  s->check_can_eat();
   check_status(s);
 }
 
@@ -43,8 +64,8 @@ int		main(int ac, char **av)
     {
       if (ac != 4)
 	throw My_exception(0, "Not enough arguments", "Usage: ./snake [weight] [height] [librairy]");
-      y = atoi(av[2]); //A CHANGER
-      x = atoi(av[1]); //A CHANGER
+      y = my_totoi(av[2]); //A CHANGER
+      x = my_totoi(av[1]); //A CHANGER
       srand(time(0));
       std::cout << "ARGUMENTS = " << x << " - " << y << std::endl;
       Snake	s(x, y);

@@ -5,14 +5,14 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 16:33:48 2015 Aurélie LAO
-// Last update Wed Apr  1 17:23:37 2015 Aurélie LAO
+// Last update Thu Apr  2 14:26:30 2015 Aurélie LAO
 //
 
 #ifndef THE_SNAKE_HH_
 # define THE_SNAKE_HH_
 
 #include <iostream>
-#include <vector>
+#include <list>
 
 // EXEMPOULE:
    // y
@@ -28,10 +28,10 @@
    // |                  |
    // -------------------- x
 
-class		Snaaake
+class		Snake
 {
 public:
-  std::vector<int>	table;
+  std::list<int>	table;
   int			x_max;
   int			y_max;
   int			x_eat;
@@ -40,10 +40,11 @@ public:
   bool			have_meal;
 
 public:
-  Snaaake(int x, int y);
-  ~Snaaake();
+  Snake(int x, int y);
+  ~Snake();
   void	turn_left();
   void	turn_right();
+  void	go_up();
   bool	check_can_eat();  
 };
 

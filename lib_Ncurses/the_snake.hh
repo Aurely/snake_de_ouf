@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 16:33:48 2015 Aurélie LAO
-// Last update Thu Apr  2 16:37:00 2015 Aurélie LAO
+// Last update Thu Apr  2 17:32:20 2015 Aurélie LAO
 //
 
 #ifndef THE_SNAKE_HH_
@@ -46,7 +46,7 @@ public:
   int			_y_eat;
   eDirection		_dir;  
   bool			_is_alive;
-  bool			_have_meal;
+  int			_have_meal;
 
 public:
   Snake(int x, int y);

@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 17:32:56 2015 Aurélie LAO
-// Last update Thu Apr  2 17:09:44 2015 Aurélie LAO
+// Last update Thu Apr  2 17:15:19 2015 Aurélie LAO
 //
 
 #include <cstring>
@@ -28,7 +28,7 @@ int                     my_totoi(char *str)
   while (str[i] != '\0')
     {
       if (str[i] < '0' || str[i] > '9')
-        return (-1);
+        throw My_exception(0, "Wrong Arguments", "Usage: ./snake [weight] [height] [librairy]");
       i = i + 1;
     }
   return (result);

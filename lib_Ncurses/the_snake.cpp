@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 15:59:55 2015 Aurélie LAO
-// Last update Thu Apr  2 17:09:15 2015 Aurélie LAO
+// Last update Thu Apr  2 17:37:32 2015 Aurélie LAO
 //
 
 #include "the_snake.hh"
@@ -39,8 +39,13 @@ void	Snake::turn_left()
   int	y;
 
   this->_dir = Left;
-  this->_table.pop_back();
-  this->_table.pop_back();
+  if (this->_have_meal == 0)
+    {
+      this->_table.pop_back();
+      this->_table.pop_back();
+    }
+  else
+    this->_have_meal = this->_have_meal - 1;
   x = this->_table.front();
   this->_table.pop_front();
   y =  this->_table.front();
@@ -59,8 +64,13 @@ void	Snake::turn_right()
   int	y;
 
   this->_dir = Right;
-  this->_table.pop_back();
-  this->_table.pop_back();
+  if (this->_have_meal == 0)
+    {
+      this->_table.pop_back();
+      this->_table.pop_back();
+    }
+  else
+    this->_have_meal = this->_have_meal - 1;
   x = this->_table.front();
   this->_table.pop_front();
   y =  this->_table.front();
@@ -79,8 +89,13 @@ void	Snake::go_up()
   int	y;
 
   this->_dir = Up;
-  this->_table.pop_back();
-  this->_table.pop_back();
+  if (this->_have_meal == 0)
+    {
+      this->_table.pop_back();
+      this->_table.pop_back();
+    }
+  else
+    this->_have_meal = this->_have_meal - 1;
   x =  this->_table.front();
   this->_table.pop_front();
   y = this->_table.front();
@@ -99,8 +114,13 @@ void	Snake::go_down()
   int	y;
 
   this->_dir = Up;
-  this->_table.pop_back();
-  this->_table.pop_back();
+  if (this->_have_meal == 0)
+    {
+      this->_table.pop_back();
+      this->_table.pop_back();
+    }
+  else
+    this->_have_meal = this->_have_meal - 1;
   x = this->_table.front();
   this->_table.pop_front();
   y =  this->_table.front();
@@ -150,12 +170,12 @@ bool	Snake::check_can_eat()
 	  this->_table.pop_back();
 	  this->_y_eat = this->_table.back();
 	  this->_table.push_back(this->_y_eat);
-	  this->_have_meal = true;
+	  this->_have_meal = 2;
 	  return (true);
 	}
       else if (it == this->_table.end())
 	{
-	  this->_have_meal = false;
+	  this->_have_meal = 2;
 	  return (false);
 	}
       ++it;

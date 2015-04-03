@@ -5,11 +5,11 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Tue Mar 31 11:04:06 2015 Aurélie LAO
-// Last update Tue Mar 31 11:41:27 2015 Aurélie LAO
+// Last update Fri Apr  3 15:24:51 2015 Aurélie LAO
 //
 
 #include <string>
-#include "my_exception.hh"
+#include "../header/my_exception.hh"
 
 My_exception::My_exception(int code, std::string const &error, std::string const &solution) throw()
 {

@@ -5,10 +5,10 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 15:59:55 2015 Aurélie LAO
-// Last update Thu Apr  2 17:37:32 2015 Aurélie LAO
+// Last update Fri Apr  3 15:24:57 2015 Aurélie LAO
 //
 
-#include "the_snake.hh"
+#include "../header/the_snake.hh"
 #include <stdlib.h>
 
 Snake::Snake(int x, int y)

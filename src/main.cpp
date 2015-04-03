@@ -5,15 +5,15 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 17:32:56 2015 Aurélie LAO
-// Last update Thu Apr  2 18:11:58 2015 Trotier Marie
+// Last update Fri Apr  3 15:30:55 2015 Aurélie LAO
 //
 
 #include <cstring>
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
-#include "the_snake.hh"
-#include "my_exception.hh"
+#include "../header/the_snake.hh"
+#include "../header/my_exception.hh"
 #include <sstream>
 
 int                     my_totoi(char *str)
@@ -44,13 +44,6 @@ void		check_status(Snake *s)
   std::cout << "y eat -------- " << s->_y_eat << std::endl;
   std::cout << "alive -------- " << s->_is_alive << std::endl;
   std::cout << "mange ? ------ " << s->_have_meal << std::endl;
-}
-
-void		go_Ncurses(Snake *s)
-{
-  check_status(s);
-  s->check_can_eat();
-  check_status(s);
 }
 
 int		main(int ac, char **av)

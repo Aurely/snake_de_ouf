@@ -5,16 +5,17 @@
 ## Login   <lao_e@epitech.net>
 ## 
 ## Started on  Thu Apr  2 14:29:28 2015 Aurélie LAO
-## Last update Thu Apr  2 14:32:06 2015 Aurélie LAO
+## Last update Fri Apr  3 15:25:45 2015 Aurélie LAO
 ##
 
 CC	=	g++
 
 RM	=	rm -f
 
-SRC	=	main.cpp \
-		the_snake.cpp \
-		my_exception.cpp
+SRC	=	./src/main.cpp \
+		./src/the_snake.cpp \
+		./src/my_exception.cpp \
+		./lib_Ncurses/ncurses.cpp
 
 NAME	=	snake
 

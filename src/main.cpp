@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 17:32:56 2015 Aurélie LAO
-// Last update Fri Apr  3 15:30:55 2015 Aurélie LAO
+// Last update Fri Apr  3 21:32:03 2015 Aurélie LAO
 //
 
 #include <cstring>
@@ -29,6 +29,8 @@ int                     my_totoi(char *str)
         throw My_exception(0, "Wrong Arguments", "Usage: ./snake [weight] [height] [librairy]");
       i = i + 1;
     }
+  if (result == 0)
+    throw My_exception(0, "Wrong Arguments", "Usage: ./snake [weight] [height] [librairy]");    
   return (result);
 }
 
@@ -55,14 +57,23 @@ int		main(int ac, char **av)
     {
       if (ac != 4)
 	throw My_exception(0, "Not enough arguments", "Usage: ./snake [weight] [height] [librairy]");
-      y = my_totoi(av[2]); //A CHANGER
-      x = my_totoi(av[1]); //A CHANGER
+      y = my_totoi(av[2]);
+      x = my_totoi(av[1]);
       srand(time(0));
       std::cout << "ARGUMENTS = " << x << " - " << y << std::endl;
       Snake	s(x, y);
-      if (strcmp(av[3], "Ncurses") == 0)
-	go_Ncurses(&s);
-      else
+      try
+	{
+	  if (strcmp(av[3], "Ncurses") == 0)
+	    go_Ncurses(&s);
+	}
+      catch (std::exception &e)
+	{
+	  endCurses();
+	  std::cerr << e.what() << std::endl;
+	  return -1;
+	}
+      if (strcmp(av[3], "Ncurses") != 0)
 	throw My_exception(0, "Wrong librairy", "Choose Ncurses or []");
     }
   catch (std::exception &e)
@@ -70,5 +81,6 @@ int		main(int ac, char **av)
       std::cerr << e.what() << std::endl;
       return -1;
     }
+
   return 0;
 }

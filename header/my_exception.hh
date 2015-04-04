@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Tue Mar 31 11:05:58 2015 Aurélie LAO
-// Last update Tue Mar 31 11:22:46 2015 Aurélie LAO
+// Last update Fri Apr  3 16:11:33 2015 Aurélie LAO
 //
 
 #ifndef MY_EXCEPTION_HH_
@@ -25,6 +25,7 @@ private:
 
 public:
   My_exception(int i, std::string const &error, std::string const &solution) throw();
+  My_exception(int i, std::string const &error) throw();
   virtual ~My_exception() throw();
   virtual const char *what() const throw();
 };

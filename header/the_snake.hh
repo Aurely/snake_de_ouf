@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 16:33:48 2015 Aurélie LAO
-// Last update Fri Apr  3 15:31:59 2015 Aurélie LAO
+// Last update Fri Apr  3 21:24:53 2015 Aurélie LAO
 //
 
 #ifndef THE_SNAKE_HH_
@@ -62,5 +62,6 @@ public:
 int	my_totoi(char *str);
 void	check_status(Snake *s);
 void	go_Ncurses(Snake *s);
+void	endCurses();
 
 #endif

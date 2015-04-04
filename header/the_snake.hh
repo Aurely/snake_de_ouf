@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 16:33:48 2015 Aurélie LAO
-// Last update Fri Apr  3 21:24:53 2015 Aurélie LAO
+// Last update Sat Apr  4 17:13:27 2015 Aurélie LAO
 //
 
 #ifndef THE_SNAKE_HH_
@@ -57,6 +57,7 @@ public:
   void	go_down();
   void	go_continu();
   bool	check_can_eat();  
+  bool	check_is_alive();
 };
 
 int	my_totoi(char *str);

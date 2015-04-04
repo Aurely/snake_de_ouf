@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Fri Apr  3 15:14:38 2015 Aurélie LAO
-// Last update Sat Apr  4 00:13:26 2015 Aurélie LAO
+// Last update Sat Apr  4 19:13:58 2015 Aurélie LAO
 //
 
 #include <ncurses/curses.h>
@@ -44,10 +44,9 @@ bool		check_x(int x,Snake *s)
   return (false);
 }
 
-void		print_snake(Snake *s)
+void		print_snake(int y, Snake *s)
 {
   int		x = 1;
-  static int	y = 1;
   std::string		str;
 
   str = "|";
@@ -56,6 +55,13 @@ void		print_snake(Snake *s)
       if (check_y(y, s) == true)
 	{
 	  if (check_x(x, s) == true)
+	    str = str + "o";
+	  else
+	    str = str + " ";
+	}
+      else if (y == s->_y_eat)
+	{
+	  if (x == s->_x_eat)
 	    str = str + "*";
 	  else
 	    str = str + " ";
@@ -66,13 +72,13 @@ void		print_snake(Snake *s)
     }
   str = str + "|";
   printw("%s\n", str.c_str());
-  ++y;
 }
 
 void		print_map(Snake *s)
 {
   int		x = s->_x_max;
-  int		y = s->_y_max - 2;
+  int		y = s->_y_max - 1;
+  //  int		y = s->_y_max - 2;
   std::string	first_str;
 
   while (x > 0)
@@ -84,7 +90,7 @@ void		print_map(Snake *s)
   printw("%s\n", first_str.c_str());
   while (y > 0)
     {
-      print_snake(s);
+      print_snake(y, s);
       --y;
     }
   printw("%s\n", first_str.c_str());
@@ -113,6 +119,11 @@ void	startCurses()
     }
 }
 
+void	print_end()
+{
+  printw("\n\n\n       %s\n", "END");
+}
+
 void	my_print(Snake *s)
 {
   int	key;
@@ -121,24 +132,33 @@ void	my_print(Snake *s)
   while ((key = getch()) != 10)
     {
       clear();
-      print_map(s);
-      switch (key)
-	{
-	case 65:
-	  printw("%s\n", "touche UP");
-	  break;
-	case 66:
-	  printw("%s\n", "touche DOWN");
-	  break;
-	case 67:
-	  printw("%s\n", "touche RIGHT");
-	  break;
-	case 68:
-	  printw("%s\n", "touche LEFT");
-	  break;
-	default:
-	  break;
+      if (s->check_is_alive() != false && s->_is_alive != false)
+      	{
+	  switch (key)
+	    {
+	    case 65:
+	      s->go_up();
+	      //printw("%s\n", "touche UP");
+	      break;
+	    case 66:
+	      s->go_down();
+	      //printw("%s\n", "touche DOWN");
+	      break;
+	    case 67:
+	      s->turn_right();
+	      //printw("%s\n", "touche RIGHT");
+	      break;
+	    case 68:
+	      s->turn_left();
+	      //printw("%s\n", "touche LEFT");
+	      break;
+	    default:
+	      break;
+	    }
+	  print_map(s);
 	}
+      else
+	print_end();
     }
 }
 void		go_Ncurses(Snake *s)

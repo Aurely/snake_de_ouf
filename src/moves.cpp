@@ -5,7 +5,7 @@
 // Login   <trotie_m@epitech.net>
 // 
 // Started on  Sun Apr  5 11:38:40 2015 Trotier Marie
-// Last update Sun Apr  5 13:21:57 2015 Trotier Marie
+// Last update Sun Apr  5 16:39:54 2015 Trotier Marie
 //
 
 #include <vector>
@@ -19,99 +19,131 @@
 #include "../header/IGraphic.hpp"
 #include "../lib_SDL/SDLlib.hpp"
 
-int	move_up(std::vector<coord *> *snake, __attribute__((unused))IGraphic *gui)
+static int	check_obstacle(std::vector<coord *>*snake)
 {
-  //check si le mouvement est possible (collision ? ect)
-  for (std::vector<coord *>::const_iterator it = snake->begin(); it != snake->end(); it++)
+  for (std::vector<coord *>::const_iterator op = snake->begin(); op != snake->end(); op++)
     {
-      if (it == snake->begin())
-	{
-	  (*it)->y = (*it)->y - 1;
-	  if ((*it)->y < 0)
-	    return (-1);
-	}
-      else
-	{
-	  //va la ou etait le précedent
-	}
-    }
-  //check si head est pas rentré dans le body du snake
-  //décaler toutes les positions du corps avec leur element précedent
-  return (0);
-}
-
-int	move_down(std::vector<coord *> *snake, IGraphic *gui)
-{
-  //check si le mouvement est possible (collision ? ect)
-  for (std::vector<coord *>::const_iterator it = snake->begin(); it != snake->end(); it++)
-    {
-      if (it == snake->begin())
-	{
-
-	  (*it)->y = (*it)->y + 1;
-	  if ((*it)->y == gui->getsize_y())
-	    return (-1);
-	}
-      else
-	{
-	  //va la ou etait le précedent
-	}
-    }
-  //check si head est pas rentré dans le body du snake
-  //décaler toutes les positions du corps avec leur element précedent
-  return (0);
-}
-
-int	move_left(std::vector<coord *> *snake, __attribute__((unused))IGraphic *gui)
-{
-  //check si le mouvement est possible (collision ? ect)
-  for (std::vector<coord *>::const_iterator it = snake->begin(); it != snake->end(); it++)
-    {
-      if (it == snake->begin())
-	{
-
-      (*it)->x = (*it)->x - 1;
-      if ((*it)->x < 0)
+      if (((((*op)->x == (*(snake->begin()))->x) && ((*op)->y == (*(snake->begin()))->y)))
+	  && op != snake->begin())
 	return (-1);
-	}
-      else
-	{
-	  //va la ou etait le précedent
-	}
-
-
     }
-  //check si head est pas rentré dans le body du snake
-  //décaler toutes les positions du corps avec leur element précedent
   return (0);
 }
 
-int	move_right(std::vector<coord *> *snake, IGraphic *gui)
+static int	move_snake(std::vector<coord *> *snake, int dir)
 {
-  //check si le mouvement est possible (collision ? ect)
   coord	prev;
+  coord	tmp;
 
   for (std::vector<coord *>::const_iterator it = snake->begin(); it != snake->end(); it++)
     {
       if (it == snake->begin())
-	{
-	  prev.x = (*it)->x;
-	  prev.y = (*it)->y;
-	  (*it)->x = (*it)->x + 1;
-	  if ((*it)->x == gui->getsize_x())
-	    return (-1);
-	}
+  	{
+  	  prev.x = (*it)->x;
+  	  prev.y = (*it)->y;
+	  if (dir == UP)
+	    {
+	      if ((*it)->y < 0)
+		return (-1);
+	      (*it)->y = (*it)->y - 1;
+	    }
+	  if (dir == LEFT)
+	    {
+	      if ((*it)->x < 0)
+		return (-1);
+	      (*it)->x = (*it)->x - 1;
+	    }
+  	}
       else
-	{
-	  // (*it)->x = prev.x;
-	  // (*it)->y = prev.y;
-	  //va la ou etait le précedent
-	}
-      prev.x = (*it)->x;
-      prev.y = (*it)->y;
-      std::cout << prev.x << ";" << prev.y <<  std::endl;
+  	{
+  	  tmp.x = (*it)->x;
+  	  tmp.y = (*it)->y;
+  	  (*it)->x = prev.x;
+  	  (*it)->y = prev.y;
+  	  prev.x = tmp.x;
+  	  prev.y = tmp.y;
+  	}
     }
-  //check si head est pas rentré dans le body du snake
-  //décaler toutes les positions du corps avec leur element précedent
   return (0);
+}
+
+static int	move_snake2(std::vector<coord *> *snake, int dir, IGraphic *gui)
+{
+  coord	prev;
+  coord	tmp;
+
+  for (std::vector<coord *>::const_iterator it = snake->begin(); it != snake->end(); it++)
+    {
+      if (it == snake->begin())
+  	{
+  	  prev.x = (*it)->x;
+  	  prev.y = (*it)->y;
+	  if (dir == DOWN)
+	    {
+	      if ((*it)->y == gui->getsize_y())
+		return (-1);
+	      (*it)->y = (*it)->y + 1;
+	    }
+	  if (dir == RIGHT)
+	    {
+	      if ((*it)->x == gui->getsize_x())
+		return (-1);
+	      (*it)->x = (*it)->x + 1;
+	    }
+  	}
+      else
+  	{
+  	  tmp.x = (*it)->x;
+  	  tmp.y = (*it)->y;
+  	  (*it)->x = prev.x;
+  	  (*it)->y = prev.y;
+  	  prev.x = tmp.x;
+  	  prev.y = tmp.y;
+  	}
+    }
+  return (0);
+}
+
+int	move_down(int *t, std::vector<coord *> *snake, IGraphic *gui, int dir)
+{
+  *t = 1;
+  if (dir == UP)
+    return (0);
+  *t = 0;
+  if (move_snake2(snake, DOWN, gui) == -1)
+    return (-1);
+  return (check_obstacle(snake));
+}
+
+int	move_right(int *t, std::vector<coord *> *snake, IGraphic *gui, int dir)
+{
+  *t = 1;
+  if (dir == LEFT)
+    return (0);
+  *t = 0;
+  if (move_snake2(snake, RIGHT, gui) == -1)
+    return (-1);
+  return (check_obstacle(snake));
+}
+
+int	move_left(int *t, std::vector<coord *> *snake, int dir)
+{
+  *t = 1;
+  if (dir == RIGHT)
+    return (0);
+  *t = 0;
+  if (move_snake(snake, LEFT) == -1)
+    return (-1);
+  return (check_obstacle(snake));
+}
+
+int	move_up(int *t, std::vector<coord *> *snake, int dir)
+{
+  *t = 1;
+  if (dir == DOWN)
+    return (0);
+  *t = 0;
+  if (move_snake(snake, UP) == -1)
+    return (-1);
+  return (check_obstacle(snake));
 }

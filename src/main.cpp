@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 17:32:56 2015 Aurélie LAO
-// Last update Sun Apr  5 13:04:30 2015 Trotier Marie
+// Last update Sun Apr  5 17:01:54 2015 Trotier Marie
 //
 
 #include <vector>
@@ -55,21 +55,28 @@ void		launch_game(std::vector<coord *> *snake, IGraphic *gui)
 {
   int		cond = 1;
   int		key;
+  int		old;
+  int		marie;
 
+
+  old = RIGHT;
   while (cond == 1)
     {
+      marie = 0;
       gui->show_snake(snake);
       key = gui->wait();
       if (key == -1)
       	cond = 0;
-      if (key == 1 && move_up(snake, gui) == -1)
+      if (key == UP && move_up(&marie, snake, old) == -1)
 	cond = 0;
-      if (key == 2 && move_down(snake, gui) == -1)
+      if (key == DOWN && move_down(&marie, snake, gui, old) == -1)
 	cond = 0;
-      if (key == 3 && move_right(snake, gui) == -1)
+      if (key == RIGHT && move_right(&marie, snake, gui, old) == -1)
 	cond = 0;
-      if (key == 4 && move_left(snake, gui) == -1)
+      if (key == LEFT && move_left(&marie, snake, old) == -1)
 	cond = 0;
+      if ((key == UP || key == DOWN || key == LEFT || key == RIGHT) && marie == 0)
+	old = key;
     }
 }
 
@@ -97,21 +104,31 @@ int		main(int ac, char **av)
   //crées la bonne gui
   gui = new MySDL(x, y);
 
-  //init the snake
+  //init the snake de façon plus élégante avec une fonction jolie
   std::vector<coord *> snake;
   coord	*point = new coord;
   coord	*point_body = new coord;
   coord	*point_body2 = new coord;
+  coord	*point_body3 = new coord;
+  coord	*point_body4 = new coord;
 
-  point->x = 2;
+
+  point->x = 4;
   point->y = 0;
   snake.push_back(point);
-  point_body->x = 1;
+  point_body->x = 3;
   point_body->y = 0;
   snake.push_back(point_body);
-  point_body2->x = 0;
+  point_body2->x = 2;
   point_body2->y = 0;
   snake.push_back(point_body2);
+  point_body3->x = 1;
+  point_body3->y = 0;
+  snake.push_back(point_body3);
+  point_body4->x = 0;
+  point_body4->y = 0;
+  snake.push_back(point_body4);
+  // -------------------
 
   gui->init_window();
   launch_game(&snake, gui);

@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 17:32:56 2015 Aurélie LAO
-// Last update Sun Apr  5 17:21:27 2015 Trotier Marie
+// Last update Sun Apr  5 18:02:51 2015 Trotier Marie
 //
 
 #include <vector>
@@ -80,10 +80,20 @@ void		launch_game(std::vector<coord *> *snake, IGraphic *gui)
     }
 }
 
+void		add_snake_part(std::vector<coord *> *snake, int x, int y)
+{
+  coord *point = new coord;
+
+  point->x = x;
+  point->y = y;
+  snake->push_back(point);
+}
+
 int		main(int ac, char **av)
 {
   int		x;
   int		y;
+  std::vector<coord *> snake;
 
   try
     {
@@ -103,34 +113,16 @@ int		main(int ac, char **av)
 
   //crées la bonne gui
   gui = new MySDL(x, y);
+  // gui = new MyNDK(x, y);
 
-  //init the snake de façon plus élégante avec une fonction jolie
-  std::vector<coord *> snake;
-  coord	*point = new coord;
-  coord	*point_body = new coord;
-  coord	*point_body2 = new coord;
-  coord	*point_body3 = new coord;
-  coord	*point_body4 = new coord;
-
-
-  point->x = 4;
-  point->y = 0;
-  snake.push_back(point);
-  point_body->x = 3;
-  point_body->y = 0;
-  snake.push_back(point_body);
-  point_body2->x = 2;
-  point_body2->y = 0;
-  snake.push_back(point_body2);
-  point_body3->x = 1;
-  point_body3->y = 0;
-  snake.push_back(point_body3);
-  point_body4->x = 0;
-  point_body4->y = 0;
-  snake.push_back(point_body4);
-  // -------------------
-
-  gui->init_window();
+  x = 3;
+  while (x >= 0)
+    {
+      add_snake_part(&snake, x, 0);
+      x = x - 1;
+    }
+  if (gui->init_window() == -1)
+    return (-1);
   launch_game(&snake, gui);
   delete gui;
   //delete tous les points du snake

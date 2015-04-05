@@ -5,7 +5,7 @@
 ## Login   <lao_e@epitech.net>
 ## 
 ## Started on  Thu Apr  2 14:29:28 2015 Aurélie LAO
-## Last update Sun Apr  5 11:38:19 2015 Trotier Marie
+## Last update Sun Apr  5 17:52:02 2015 Trotier Marie
 ##
 
 CC		=	g++
@@ -14,7 +14,8 @@ RM		=	rm -f
 BASE_SRCS	=	./src/main.cpp  \
 			./src/my_exception.cpp \
 			./src/the_snake.cpp \
-			./src/moves.cpp
+			./src/moves.cpp \
+			./lib_NDK/NDKlib.cpp
 BASE_OBJS	=	$(BASE_SRCS:.cpp=.o)
 BASE_NAME	=	nibbler
 
@@ -27,7 +28,7 @@ CPPFLAGS  	=       -W -Wall -Wextra
 all:			$(BASE_NAME)
 
 $(BASE_NAME):		$(BASE_OBJS) $(SDL_OBJS)
-			$(CC) -o $(BASE_NAME) $(BASE_OBJS) $(SDL_OBJS) $(CPPFLAGS) -lSDL -lSDL_gfx -lSDL_image -lSDL_ttf
+			$(CC) -o $(BASE_NAME) $(BASE_OBJS) $(SDL_OBJS) $(CPPFLAGS) -lSDL -lSDL_gfx -lSDL_image -lSDL_ttf -lncurses
 
 # all:			$(BASE_NAME) $(SDL_NAME)
 

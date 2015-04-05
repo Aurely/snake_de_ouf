@@ -5,7 +5,7 @@
 // Login   <trotie_m@epitech.net>
 // 
 // Started on  Sun Apr  5 11:38:40 2015 Trotier Marie
-// Last update Sun Apr  5 16:39:54 2015 Trotier Marie
+// Last update Sun Apr  5 17:50:02 2015 Trotier Marie
 //
 
 #include <vector>
@@ -43,13 +43,13 @@ static int	move_snake(std::vector<coord *> *snake, int dir)
   	  prev.y = (*it)->y;
 	  if (dir == UP)
 	    {
-	      if ((*it)->y < 0)
+	      if ((*it)->y <= 0)
 		return (-1);
 	      (*it)->y = (*it)->y - 1;
 	    }
 	  if (dir == LEFT)
 	    {
-	      if ((*it)->x < 0)
+	      if ((*it)->x <= 0)
 		return (-1);
 	      (*it)->x = (*it)->x - 1;
 	    }
@@ -80,13 +80,13 @@ static int	move_snake2(std::vector<coord *> *snake, int dir, IGraphic *gui)
   	  prev.y = (*it)->y;
 	  if (dir == DOWN)
 	    {
-	      if ((*it)->y == gui->getsize_y())
+	      if ((*it)->y + 1 == gui->getsize_y())
 		return (-1);
 	      (*it)->y = (*it)->y + 1;
 	    }
 	  if (dir == RIGHT)
 	    {
-	      if ((*it)->x == gui->getsize_x())
+	      if ((*it)->x + 1 == gui->getsize_x())
 		return (-1);
 	      (*it)->x = (*it)->x + 1;
 	    }

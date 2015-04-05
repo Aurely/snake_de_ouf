@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Fri Apr  3 15:14:38 2015 Aurélie LAO
-// Last update Sat Apr  4 19:13:58 2015 Aurélie LAO
+// Last update Sun Apr  5 16:42:56 2015 Aurélie LAO
 //
 
 #include <ncurses/curses.h>
@@ -78,7 +78,6 @@ void		print_map(Snake *s)
 {
   int		x = s->_x_max;
   int		y = s->_y_max - 1;
-  //  int		y = s->_y_max - 2;
   std::string	first_str;
 
   while (x > 0)
@@ -121,7 +120,16 @@ void	startCurses()
 
 void	print_end()
 {
-  printw("\n\n\n       %s\n", "END");
+  printw("\n\n\n                %s\n", "END");
+  printw("\n%s\n", "Nibbler by Marie TROTIER & Aurelie LAO");
+  printw("\n\n\n       %s\n", "Press Enter to exit");
+}
+
+void	print_stat(Snake *s)
+{
+  printw("%s\n", "List =");
+  for (std::list<int>::iterator it = s->_table.begin(); it != s->_table.end(); it++)
+    printw("%d\n", *it);
 }
 
 void	my_print(Snake *s)
@@ -136,26 +144,73 @@ void	my_print(Snake *s)
       	{
 	  switch (key)
 	    {
-	    case 65:
-	      s->go_up();
-	      //printw("%s\n", "touche UP");
+	    case 65: //UP
+	      if (s->_dir != Down)
+		{
+		  s->go_up();
+		  if (s->check_is_alive() == false)
+		    print_end();
+		  else
+		    {
+		      s->check_can_eat();
+		      print_map(s);
+		      print_stat(s);
+		    }
+		}
+	      else
+		print_map(s);
 	      break;
-	    case 66:
-	      s->go_down();
-	      //printw("%s\n", "touche DOWN");
+	    case 66: //DOWN
+	      if (s->_dir != Up)
+		{
+		  s->go_down();
+		  if (s->check_is_alive() == false)
+		    print_end();
+		  else
+		    {
+		      s->check_can_eat();
+		      print_map(s);
+		      print_stat(s);
+		    }
+		}
+	      else
+		print_map(s);
 	      break;
-	    case 67:
-	      s->turn_right();
-	      //printw("%s\n", "touche RIGHT");
+	    case 67: //RIGHT
+	      if (s->_dir != Left)
+		{
+		  s->turn_right();
+		  if (s->check_is_alive() == false)
+		    print_end();
+		  else
+		    {
+		      s->check_can_eat();
+		      print_map(s);
+		      print_stat(s);
+		    }
+		}
+	      else
+		print_map(s);
 	      break;
-	    case 68:
-	      s->turn_left();
-	      //printw("%s\n", "touche LEFT");
+	    case 68: //LEFT
+	      if (s->_dir != Right)
+		{
+		  s->turn_left();
+		  if (s->check_is_alive() == false)
+		    print_end();
+		  else
+		    {
+		      s->check_can_eat();
+		      print_map(s);
+		      print_stat(s);
+		    }
+		}
+	      else
+		print_map(s);
 	      break;
 	    default:
 	      break;
 	    }
-	  print_map(s);
 	}
       else
 	print_end();

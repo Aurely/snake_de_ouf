@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 17:32:56 2015 Aurélie LAO
-// Last update Sun Apr  5 12:07:59 2015 Aurélie LAO
+// Last update Sun Apr  5 13:33:16 2015 Aurélie LAO
 //
 
 #include <cstring>
@@ -62,10 +62,13 @@ int		main(int ac, char **av)
       srand(time(0));
       std::cout << "ARGUMENTS = " << x << " - " << y << std::endl;
       Snake	s(x, y);
+      std::cout << "test";
       try
 	{
 	  if (strcmp(av[3], "Ncurses") == 0)
 	    go_Ncurses(&s);
+	  else
+	    throw My_exception(0, "Wrong librairy", "Choose Ncurses or []");
 	}
       catch (std::exception &e)
 	{
@@ -73,8 +76,6 @@ int		main(int ac, char **av)
 	  std::cerr << e.what() << std::endl;
 	  return -1;
 	}
-      if (strcmp(av[3], "Ncurses") != 0)
-	throw My_exception(0, "Wrong librairy", "Choose Ncurses or []");
     }
   catch (std::exception &e)
     {

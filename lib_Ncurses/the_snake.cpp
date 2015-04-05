@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 15:59:55 2015 Aurélie LAO
-// Last update Sun Apr  5 17:51:30 2015 Aurélie LAO
+// Last update Sun Apr  5 18:17:54 2015 Aurélie LAO
 //
 
 #include "../header/the_snake.hh"
@@ -22,10 +22,10 @@ Snake::Snake(int x, int y)
 
   this->_x_max = x;
   this->_y_max = y;
-  while ((this->_x_eat = rand() % x) == 0 || this->_x_eat == (x / 2))
+  while ((this->_x_eat = rand() % x) == 0 || this->_x_eat == rand() % (x / 2))
     rand();
   while ((this->_y_eat = rand() % y) == 0 ||
-	 this->_y_eat == (y / 2) ||
+	 this->_y_eat ==(y / 2) ||
 	 this->_y_eat == (y / 2 - 1) ||
 	 this->_y_eat == (y / 2 - 2))
     rand();
@@ -209,10 +209,10 @@ bool	Snake::check_can_eat()
       ++it;
       if (count != 0 && *it == this->_y_eat)
 	{
-	  this->_x_eat = this->_table.back();
-	  this->_table.pop_back();
 	  this->_y_eat = this->_table.back();
-	  this->_table.push_back(this->_y_eat);
+	  this->_table.pop_back();
+	  this->_x_eat = this->_table.back();
+	  this->_table.push_back(this->_x_eat);
 	  this->_have_meal = 2;
 	  return (true);
 	}

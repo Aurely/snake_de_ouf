@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 17:32:56 2015 Aurélie LAO
-// Last update Sun Apr  5 18:02:51 2015 Trotier Marie
+// Last update Sun Apr  5 19:19:06 2015 Aurélie LAO
 //
 
 #include <vector>
@@ -98,7 +98,7 @@ int		main(int ac, char **av)
   try
     {
       if (ac != 4)
-	throw My_exception(0, "Not enough arguments", "Usage: ./snake [weight] [height] [librairy]");
+	throw My_exception(0, "Not enough arguments", "Usage: ./snake [width] [height] [librairy]");
       y = my_totoi(av[2]);
       x = my_totoi(av[1]);
       srand(time(0));
@@ -109,22 +109,35 @@ int		main(int ac, char **av)
       std::cerr << e.what() << std::endl;
       return -1;
     }
-  IGraphic	*gui;
-
-  //crées la bonne gui
-  gui = new MySDL(x, y);
-  // gui = new MyNDK(x, y);
-
-  x = 3;
-  while (x >= 0)
-    {
-      add_snake_part(&snake, x, 0);
-      x = x - 1;
+      try
+	{
+	  if (strcmp(av[3], "SDL") == 0 || strcmp(av[3], "Ncurses") == 0)
+	    {
+	      IGraphic	*gui;
+	      
+	      //crées la bonne gui
+	      gui = new MySDL(x, y);
+	      // gui = new MyNDK(x, y);
+	      
+	      x = 3;
+	      while (x >= 0)
+		{
+		  add_snake_part(&snake, x, 0);
+		  x = x - 1;
+		}
+	      if (gui->init_window() == -1)
+		return (-1);
+	      launch_game(&snake, gui);
+	    }
+	  else
+	    throw My_exception(0, "Wrong librairy", "Choose Ncurses or []");
+	  delete gui;
+	}
+      catch (std::exception &e)
+	{
+	  std::cerr << e.what() << std::endl;
+	  return -1;
+	}
     }
-  if (gui->init_window() == -1)
-    return (-1);
-  launch_game(&snake, gui);
-  delete gui;
-  //delete tous les points du snake
   return 0;
 }

@@ -5,28 +5,23 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 16:33:48 2015 Aurélie LAO
-// Last update Sat Apr  4 17:13:27 2015 Aurélie LAO
+// Last update Sun Apr  5 12:41:57 2015 Trotier Marie
 //
 
 #ifndef THE_SNAKE_HH_
 # define THE_SNAKE_HH_
 
+#include <vector>
 #include <iostream>
 #include <list>
 
-// EXEMPOULE:
-   // y
-   // --------------------
-   // |                  |
-   // |                  |
-   // |                  |
-   // |                  |
-   // |        0         |
-   // |        O         |
-   // |        O         |
-   // |                  |
-   // |                  |
-   // -------------------- x
+class IGraphic;
+
+typedef struct	coord
+{
+  int	x;
+  int	y;
+}	coord;
 
 enum	eDirection
 {
@@ -64,5 +59,10 @@ int	my_totoi(char *str);
 void	check_status(Snake *s);
 void	go_Ncurses(Snake *s);
 void	endCurses();
+
+int	move_up(std::vector<coord *> *snake, IGraphic *gui);
+int	move_down(std::vector<coord *> *snake, IGraphic *gui);
+int	move_right(std::vector<coord *> *snake, IGraphic *gui);
+int	move_left(std::vector<coord *> *snake, IGraphic *gui);
 
 #endif

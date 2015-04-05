@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 15:59:55 2015 Aurélie LAO
-// Last update Sun Apr  5 12:09:19 2015 Aurélie LAO
+// Last update Sun Apr  5 17:51:30 2015 Aurélie LAO
 //
 
 #include "../header/the_snake.hh"
@@ -118,7 +118,7 @@ void	Snake::go_down()
   int	x;
   int	y;
 
-  this->_dir = Up;
+  this->_dir = Down;
   if (this->_have_meal == 0)
     {
       this->_table.pop_back();

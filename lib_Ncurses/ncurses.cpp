@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Fri Apr  3 15:14:38 2015 Aurélie LAO
-// Last update Sun Apr  5 16:42:56 2015 Aurélie LAO
+// Last update Sun Apr  5 17:56:49 2015 Aurélie LAO
 //
 
 #include <ncurses/curses.h>
@@ -16,32 +16,24 @@
 
 bool curses_started = false;
 
-bool		check_y(int y, Snake *s)
-{
-  std::list<int>::iterator it = s->_table.begin();
-
-  while (it != s->_table.end())
-    {
-      ++it;
-      if ((y != s->_y_max) && (y == *it))
-	return (true);
-      ++it;
-    }
-  return (false);
-}
-
-bool		check_x(int x,Snake *s)
+bool		check_coord(int x, int y, Snake *s)
 {
   std::list<int>::iterator it = s->_table.begin();
 
   while (it != s->_table.end())
     {
       if ((x != s->_x_max) && (x == *it))
-	return (true);
-      ++it;
+	{
+	  ++it;
+	  if ((y != s->_y_max) && (y == *it))
+	    return (true);
+	}
+      else
+	++it;
       ++it;
     }
   return (false);
+  
 }
 
 void		print_snake(int y, Snake *s)
@@ -52,20 +44,10 @@ void		print_snake(int y, Snake *s)
   str = "|";
   while (x < s->_x_max - 1)
     {
-      if (check_y(y, s) == true)
-	{
-	  if (check_x(x, s) == true)
-	    str = str + "o";
-	  else
-	    str = str + " ";
-	}
-      else if (y == s->_y_eat)
-	{
-	  if (x == s->_x_eat)
-	    str = str + "*";
-	  else
-	    str = str + " ";
-	}
+      if (y == s->_y_eat && x == s->_x_eat)
+	str = str + "*";
+      else if (check_coord(x, y, s) == true)
+	str = str + "o";
       else
 	str = str + " ";
       ++x;
@@ -127,7 +109,7 @@ void	print_end()
 
 void	print_stat(Snake *s)
 {
-  printw("%s\n", "List =");
+  printw("eat = (%d, %d)\n%s\n", s->_x_eat, s->_y_eat, "List =");
   for (std::list<int>::iterator it = s->_table.begin(); it != s->_table.end(); it++)
     printw("%d\n", *it);
 }

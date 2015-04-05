@@ -5,7 +5,7 @@
 // Login   <lao_e@epitech.net>
 // 
 // Started on  Wed Apr  1 16:33:48 2015 Aurélie LAO
-// Last update Sun Apr  5 12:41:57 2015 Trotier Marie
+// Last update Sun Apr  5 16:09:20 2015 Trotier Marie
 //
 
 #ifndef THE_SNAKE_HH_
@@ -22,6 +22,11 @@ typedef struct	coord
   int	x;
   int	y;
 }	coord;
+
+# define UP 10
+# define DOWN 20
+# define RIGHT 30
+# define LEFT 40
 
 enum	eDirection
 {
@@ -60,9 +65,9 @@ void	check_status(Snake *s);
 void	go_Ncurses(Snake *s);
 void	endCurses();
 
-int	move_up(std::vector<coord *> *snake, IGraphic *gui);
-int	move_down(std::vector<coord *> *snake, IGraphic *gui);
-int	move_right(std::vector<coord *> *snake, IGraphic *gui);
-int	move_left(std::vector<coord *> *snake, IGraphic *gui);
+int	move_up(int *t, std::vector<coord *> *snake, int dir);
+int	move_down(int *t,std::vector<coord *> *snake, IGraphic *gui, int dir);
+int	move_right(int *t, std::vector<coord *> *snake, IGraphic *gui, int dir);
+int	move_left(int *t, std::vector<coord *> *snake, int dir);
 
 #endif

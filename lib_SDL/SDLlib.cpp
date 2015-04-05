@@ -5,7 +5,7 @@
 // Login   <trotie_m@epitech.net>
 // 
 // Started on  Sat Apr  4 18:52:32 2015 Trotier Marie
-// Last update Sun Apr  5 13:03:26 2015 Trotier Marie
+// Last update Sun Apr  5 16:42:49 2015 Trotier Marie
 //
 
 #include <sstream>
@@ -25,7 +25,6 @@ MySDL::~MySDL()
   SDL_Quit();
 }
 
-//on sait pas encore quoi en faire ??
 int    MySDL::wait()
 {
   SDL_Event     event;
@@ -40,20 +39,19 @@ int    MySDL::wait()
 	if (event.key.keysym.sym == SDLK_ESCAPE)
 	  return (-1);
 	if (event.key.keysym.sym == SDLK_UP)
-	  return (1);
+	  return (UP);
 	if (event.key.keysym.sym == SDLK_DOWN)
-	  return (2);
+	  return (DOWN);
 	if (event.key.keysym.sym == SDLK_RIGHT)
-	  return (3);
+	  return (RIGHT);
 	if (event.key.keysym.sym == SDLK_LEFT)
-	  return (4);
+	  return (LEFT);
       }
       return (0);
     }
   return (0);
 }
 
-//affichage du snake dans la fenetre
 void    MySDL::show_snake(std::vector<coord *>* snake)
 {
   SDL_Rect      pos;
@@ -71,7 +69,6 @@ void    MySDL::show_snake(std::vector<coord *>* snake)
   SDL_Flip(this->screen);
 }
 
-  //initialisation
 int	MySDL::init_window()
 {
   if (SDL_Init(SDL_INIT_VIDEO) == -1)
@@ -79,12 +76,10 @@ int	MySDL::init_window()
   if ((this->screen = SDL_SetVideoMode(20 * this->_x, 20 * this->_y, 32, SDL_HWSURFACE)) == NULL)
     return (-1);
   SDL_WM_SetCaption("Nibbler", NULL);
-  // //charge le sprite pour le snake
   if ((this->head = IMG_Load("./lib_SDL/head.jpg")) == NULL ||
       (this->body = IMG_Load("./lib_SDL/body.jpg")) == NULL ||
       (this->food = IMG_Load("./lib_SDL/food.jpg")) == NULL)
     return (-1);
-
   SDL_Flip(screen);
   return(0);
 }

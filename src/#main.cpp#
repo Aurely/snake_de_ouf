@@ -80,6 +80,9 @@ void		launch_game(std::vector<coord *> *snake, IGraphic *gui)
     }
 }
 
+
+
+
 int		main(int ac, char **av)
 {
   int		x;

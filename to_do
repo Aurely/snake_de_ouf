@@ -1,0 +1,15 @@
+	main:
+faire une fonction qui init le corps du snake (de façon pas dégueu)
+créer la bonne gui : strcmp ncurse ou SDL => new ***(x, y)
+a la fin, libérer le snake (delete tous les points du snake)
+
+
+     	NDK
+constructor
+wait : return la touche pressée (return les valeurs UP DOWN LEFT RIGHT ou -1 pour quitter)
+show_snake : efface l'ecran, réaffiche le snake
+init_window : fonction qui init tout
+destructor : remet tout comme avant (mega important)
+getsize_y et getsize_x : return la taille de l'écran
+
+classe hérite de IGraphic
